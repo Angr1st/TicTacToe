@@ -22,7 +22,7 @@ type Turn =
   {
     Number:int;
     ClickedBy:Clicker;
-    ClickedButton:Button
+    ClickedButton:Button option
   }
 
 type Model = {GameBoard:Board; CurrentTurn:Turn}

@@ -3,6 +3,12 @@ module TicTacToe.State
 open Elmish
 open Types
 
+let initTurn =
+  {Number=0; ClickedBy=Clicker.Nobody;ClickedButton=None}
+
+let initBoard =
+  {}
+
 let init () : Model * Cmd<Msg> =
   0, []
 
