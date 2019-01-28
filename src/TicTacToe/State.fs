@@ -7,7 +7,7 @@ open Aether.Operators
 open Aether
 
 let initTurn =
-  {Number=0; ClickedBy=Clicker.Nobody;ClickedButton=None}
+  {Number=0; ClickedBy=Clicker.Nobody;ClickedButton=None;WonBy=None}
 
 let initButton x y =
   {

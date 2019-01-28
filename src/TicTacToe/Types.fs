@@ -35,7 +35,8 @@ type Turn =
   {
     Number:int;
     ClickedBy:Clicker;
-    ClickedButton:Button option
+    ClickedButton:Button option;
+    WonBy:Clicker option
   }
 
   static member Number_ =
@@ -50,6 +51,13 @@ type Turn =
       match a with
       | a when a.ClickedButton.IsSome -> {a with ClickedButton = Some b}
       | a -> a)
+
+  static member WonBy_ =
+  (fun a -> a.WonBy),
+  (fun b a ->
+    match a with
+    | a when a.WonBy.IsSome -> {a with WonBy = Some b}
+    | a -> a)
 
 type Model =
   {GameBoard:Board; CurrentTurn:Turn}
