@@ -59,14 +59,30 @@ type Turn =
     | a when a.WonBy.IsSome -> {a with WonBy = Some b}
     | a -> a)
 
+type HighScore =
+  {
+    Player:int;
+    Computer:int;
+  }
+
+  static member Player_ =
+    ((fun a -> a.Player), (fun b a -> {a with Player = b}))
+
+  static member Computer_ =
+    ((fun a -> a.Computer), (fun b a -> {a with Computer = b}))
+
+
 type Model =
-  {GameBoard:Board; CurrentTurn:Turn}
+  {GameBoard:Board; CurrentTurn:Turn;Scoreboard:HighScore}
 
   static member GameBoard_ =
     ((fun a -> a.GameBoard), (fun b a -> {a with GameBoard = b}))
 
   static member CurrentTurn_ =
     ((fun a -> a.CurrentTurn), (fun b a -> {a with CurrentTurn = b}))
+
+  static member Scoreboard_ =
+    ((fun a -> a.Scoreboard), (fun b a -> {a with Scoreboard = b}))
 
 type Msg =
   | PlayerTurn of Turn

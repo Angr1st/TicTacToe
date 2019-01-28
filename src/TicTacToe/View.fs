@@ -4,6 +4,7 @@ open Fable.Core
 open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open Types
+open Aether
 
 let simpleButton txt action dispatch =
   div
@@ -13,7 +14,12 @@ let simpleButton txt action dispatch =
           OnClick (fun _ -> action |> dispatch) ]
         [ str txt ] ]
 
-let root model dispatch =
+let root (model:Model) dispatch =
+  let getScore model (lens:Lens<HighScore,int>) =
+    Optic.get (Compose.lens Model.Scoreboard_ lens) model
+
+  let getScore' = getScore model
+
   div
     [ ClassName "columns is-vcentered" ]
     [ div [ ClassName "column" ] [ ]
@@ -21,8 +27,7 @@ let root model dispatch =
         [ ClassName "column is-narrow"
           Style
             [ CSSProp.Width "170px" ] ]
-        [ str (sprintf "Counter value: %i" model) ]
-      simpleButton "+1" Increment dispatch
-      simpleButton "-1" Decrement dispatch
+        [ str (sprintf "Score: Player Wins: %i Computer Wins: %i" (getScore' HighScore.Player_) (getScore' HighScore.Player_)) ]
+      //model.
       simpleButton "Reset" Reset dispatch
       div [ ClassName "column" ] [ ] ]

@@ -5,6 +5,7 @@ open Types
 open System.Drawing
 open Aether.Operators
 open Aether
+open Fable
 
 let initTurn =
   {Number=0; ClickedBy=Clicker.Nobody;ClickedButton=None;WonBy=None}
@@ -28,8 +29,10 @@ let initBoard =
 
   {Buttons = newButtons}
 
+let initScoreBoard = {Player=0;Computer=0}
+
 let initModel =
-  {GameBoard = initBoard; CurrentTurn = initTurn}
+  {GameBoard = initBoard; CurrentTurn = initTurn;Scoreboard = initScoreBoard}
 
 let init () : Model * Cmd<Msg> =
   (initModel, [])
