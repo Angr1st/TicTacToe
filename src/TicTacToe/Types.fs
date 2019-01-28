@@ -1,6 +1,4 @@
 module TicTacToe.Types
-open System.Net
-open Aether
 
 type Clicker =
   | Human
@@ -64,11 +62,11 @@ type Turn =
       | a -> a)
 
   static member WonBy_ =
-  (fun a -> a.WonBy),
-  (fun b a ->
-    match a with
-    | a when a.WonBy.IsSome -> {a with WonBy = Some b}
-    | a -> a)
+    (fun a -> a.WonBy),
+    (fun b a ->
+      match a with
+      | a when a.WonBy.IsSome -> {a with WonBy = Some b}
+      | a -> a)
 
 type HighScore =
   {
