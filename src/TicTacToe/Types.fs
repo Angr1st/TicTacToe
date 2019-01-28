@@ -14,6 +14,9 @@ type Button =
     ClickedBy: Clicker
   }
 
+  static member ComparePosition (first:Point) (second:Point) =
+     (first.X = second.X && first.Y = second.Y)
+
   static member Position_ =
     ((fun a -> a.Position), (fun b a -> {a with Position = b}))
 
@@ -58,6 +61,5 @@ type Model =
     ((fun a -> a.CurrentTurn), (fun b a -> {a with CurrentTurn = b}))
 
 type Msg =
-  | PlayersTurn of Turn
-  | ComputerTurn of Turn
+  | PlayerTurn of Turn
   | Reset

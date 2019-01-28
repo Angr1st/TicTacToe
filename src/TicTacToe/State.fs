@@ -3,6 +3,8 @@ module TicTacToe.State
 open Elmish
 open Types
 open System.Drawing
+open Aether.Operators
+open Aether
 
 let initTurn =
   {Number=0; ClickedBy=Clicker.Nobody;ClickedButton=None}
@@ -32,11 +34,23 @@ let initModel =
 let init () : Model * Cmd<Msg> =
   (initModel, [])
 
+let updateBoard =
+  Model.GameBoard_ >-> Board.Buttons_
+
 let update msg model =
+  let updateButtons gameBoard button =
+    match button with
+    | Some b -> gameBoard.Buttons |> List.map (fun x -> if (Button.ComparePosition x.Position b.Position) then b else x)
+    | None -> gameBoard.Buttons
+
+  let updateModel (oldModel:Model) (newTurn:Turn) =
+    let updateGameBoard =
+     Optic.set updateBoard (updateButtons oldModel.GameBoard newTurn.ClickedButton) oldModel
+
+    {updateGameBoard with CurrentTurn = newTurn}
+
   match msg with
-  | PlayersTurn newestTurn ->
-      model + 1, []
-  | ComputerTurn newestTurn ->
-      model - 1, []
+  | PlayerTurn newestTurn ->
+      updateModel model newestTurn, []
   | Reset ->
       (initModel, [])
