@@ -27,7 +27,7 @@ let root (model:Model) dispatch =
         [ ClassName "column is-narrow"
           Style
             [ CSSProp.Width "170px" ] ]
-        [ str (sprintf "Score: Player Wins: %i Computer Wins: %i" (getScore' HighScore.Player_) (getScore' HighScore.Player_)) ]
+        [ str (sprintf "Player Wins: %i Computer Wins: %i" (getScore' HighScore.Player_) (getScore' HighScore.Player_)) ]
       //model.
       simpleButton "Reset" Reset dispatch
       div [ ClassName "column" ] [ ] ]
