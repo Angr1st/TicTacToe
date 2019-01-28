@@ -2,7 +2,6 @@ module TicTacToe.State
 
 open Elmish
 open Types
-open System.Drawing
 open Aether.Operators
 open Aether
 open Fable
@@ -12,7 +11,7 @@ let initTurn =
 
 let initButton x y =
   {
-    Position = Point(x,y);
+    Position = {X=x;Y=y};
     ClickedBy = Clicker.Nobody
   }
 
@@ -54,6 +53,6 @@ let update msg model =
 
   match msg with
   | PlayerTurn newestTurn ->
-      updateModel model newestTurn, []
+      (updateModel model newestTurn, [])
   | Reset ->
       (initModel, [])
